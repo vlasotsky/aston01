@@ -1,15 +1,15 @@
 package ru.aston.aston01.storage;
 
-public interface Storage {
-    void save(Object element);
+public interface Storage<Element> {
+    void save(Element element);
 
-    void insert(int idx, Object element);
+    void insert(int idx, Element element);
 
-    void update(int idx, Object elem);
+    void update(int idx, Element elem);
 
-    Object get(int idx);
+    Element get(int idx);
 
-    void delete(Object element);
+    void delete(Element element);
 
     void deleteByIndex(int idx);
 
@@ -17,5 +17,7 @@ public interface Storage {
 
     int size();
 
-    Object[] getAll();
+    Element[] getAll();
+
+    Element[] getAllSorted();
 }

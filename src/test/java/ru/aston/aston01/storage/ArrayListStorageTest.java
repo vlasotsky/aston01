@@ -10,7 +10,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class ArrayListStorageTest {
-    private final Storage storage;
+    private final Storage<UUID> storage;
 
     private static final int INITIAL_SIZE = 7;
     private static final int INITIAL_SIZE_ONE_LESS = INITIAL_SIZE - 1;
@@ -49,7 +49,7 @@ public class ArrayListStorageTest {
 
 
     public ArrayListStorageTest() {
-        this.storage = new ArrayListStorage();
+        this.storage = new ArrayListStorage<>();
     }
 
     @Before
@@ -184,6 +184,10 @@ public class ArrayListStorageTest {
     @Test
     public void size() {
         assertEquals(INITIAL_SIZE, storage.size());
+    }
+
+    @Test
+    public void getAllSorted() {
     }
 
     private void assertSize(int expected) {

@@ -2,12 +2,11 @@ package ru.aston.aston01.storage;
 
 import java.util.Arrays;
 
-public class ArrayListStorage implements Storage {
+public class ArrayListStorage<Element> implements Storage<Element> {
     private Object[] elementData;
     private int size;
     private int capacity;
     private static final int DEFAULT_CAPACITY = 8;
-
 
     public ArrayListStorage() {
         this.capacity = DEFAULT_CAPACITY;
@@ -26,13 +25,13 @@ public class ArrayListStorage implements Storage {
     }
 
     @Override
-    public void save(Object element) {
+    public void save(Element element) {
         validateCapacity();
         doSave(size, element);
     }
 
     @Override
-    public void insert(int idx, Object element) {
+    public void insert(int idx, Element element) {
         validateCapacity();
         validateIndex(idx);
 
@@ -41,21 +40,22 @@ public class ArrayListStorage implements Storage {
     }
 
     @Override
-    public void update(int idx, Object elem) {
+    public void update(int idx, Element element) {
         validateIndex(idx);
 
-        elementData[idx] = elem;
+        elementData[idx] = element;
     }
 
     @Override
-    public Object get(int idx) {
+    @SuppressWarnings("unchecked")
+    public Element get(int idx) {
         validateIndex(idx);
 
-        return elementData[idx];
+        return (Element) elementData[idx];
     }
 
     @Override
-    public void delete(Object element) {
+    public void delete(Element element) {
         final int idx = getIndex(element);
         validateIndex(idx);
 
@@ -81,8 +81,14 @@ public class ArrayListStorage implements Storage {
     }
 
     @Override
-    public Object[] getAll() {
-        return Arrays.copyOfRange(elementData, 0, size);
+    @SuppressWarnings("unchecked")
+    public Element[] getAll() {
+        return (Element[]) Arrays.copyOfRange(elementData, 0, size);
+    }
+
+    @Override
+    public Element[] getAllSorted() {
+        return null;
     }
 
     private void validateCapacity() {
@@ -102,7 +108,7 @@ public class ArrayListStorage implements Storage {
         }
     }
 
-    private void doSave(int idx, Object element) {
+    private void doSave(int idx, Element element) {
         elementData[idx] = element;
         size++;
     }
@@ -113,7 +119,7 @@ public class ArrayListStorage implements Storage {
         size--;
     }
 
-    private int getIndex(Object element) {
+    private int getIndex(Element element) {
         for (int i = 0; i < size; i++) {
             if (elementData[i].equals(element)) {
                 return i;

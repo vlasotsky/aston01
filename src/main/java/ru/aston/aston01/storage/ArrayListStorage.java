@@ -32,7 +32,7 @@ public class ArrayListStorage<Element> implements Storage<Element> {
     }
 
     /**
-     * Saves an element into the list and checks if the storage
+     * Saves an element into the list by appending it to the end and checks if the storage
      * needs to be dynamically resized if it is full.
      *
      * @param element the element to be saved in the list

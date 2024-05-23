@@ -1,5 +1,11 @@
 package ru.aston.aston01.storage;
 
+/**
+ * The interface declaring different CRUD operations (create, read, update, delete)
+ * meant to be implemented by different storage types.
+ *
+ * @param <Element> the type of the elements to be stored in a storage
+ */
 public interface Storage<Element> {
     void save(Element element);
 

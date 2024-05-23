@@ -1,5 +1,7 @@
 package ru.aston.aston01.storage;
 
+import java.util.Comparator;
+
 /**
  * The interface declaring different CRUD operations (create, read, update, delete)
  * meant to be implemented by different storage types.
@@ -23,7 +25,7 @@ public interface Storage<Element> {
 
     int size();
 
-    Element[] getAll();
+    Object[] getAll();
 
-    Element[] getAllSorted();
+    Element[] getAllSorted(Comparator<Element> comparator);
 }

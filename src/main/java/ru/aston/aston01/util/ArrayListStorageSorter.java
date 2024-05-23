@@ -9,7 +9,9 @@ import java.util.Comparator;
  */
 public class ArrayListStorageSorter {
     /**
-     * The static method to sort elements in the array
+     * The static method to sort elements in the array.
+     * This algorithm is the same as the one written in Python
+     * in "Grokking Algorithms" book.
      *
      * @param array      the array of type Element to be sorted
      * @param comparator the comparator in which logic the array should be sorted
@@ -17,7 +19,7 @@ public class ArrayListStorageSorter {
      * @param <Element>  type of the elements used with the method
      * @return a sorted array of objects of type Element
      */
-    public static <Element> Element[] quickSort(Element[] array, Comparator<? super Element> comparator, Class<?> type) {
+    public static <Element> Element[] quickSort(Element[] array, Comparator<Element> comparator, Class<?> type) {
         if (array.length < 2) {
             return array;
         }

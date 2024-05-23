@@ -146,9 +146,8 @@ public class ArrayListStorage<Element> implements Storage<Element> {
      * @return an array containing all elements in the list
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public Element[] getAll() {
-        return (Element[]) Arrays.copyOfRange(elementData, 0, size);
+    public Object[] getAll() {
+        return Arrays.copyOfRange(elementData, 0, size);
     }
 
     /**
@@ -157,8 +156,10 @@ public class ArrayListStorage<Element> implements Storage<Element> {
      * @return an array with naturally sorted elements or {@code null} if the method is not yet implemented
      */
     @Override
-    public Element[] getAllSorted() {
-        return ArrayListStorageSorter.quickSort((Element[]) elementData, Comparator.naturalOrder(), elementData.getClass().componentType());
+    @SuppressWarnings("unchecked")
+    public Element[] getAllSorted(Comparator<Element> comparator) {
+        final Element[] elementsActuallyStored = (Element[]) Arrays.copyOfRange(elementData, 0, size);
+        return ArrayListStorageSorter.quickSort(elementsActuallyStored, comparator, elementData.getClass().componentType());
     }
 
     private void validateCapacity() {

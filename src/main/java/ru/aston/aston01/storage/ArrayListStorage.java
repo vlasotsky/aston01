@@ -1,6 +1,9 @@
 package ru.aston.aston01.storage;
 
+import ru.aston.aston01.util.ArrayListStorageSorter;
+
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * A custom implementation of the standard ArrayList class.
@@ -155,7 +158,7 @@ public class ArrayListStorage<Element> implements Storage<Element> {
      */
     @Override
     public Element[] getAllSorted() {
-        return null;
+        return ArrayListStorageSorter.quickSort((Element[]) elementData, Comparator.naturalOrder(), elementData.getClass().componentType());
     }
 
     private void validateCapacity() {

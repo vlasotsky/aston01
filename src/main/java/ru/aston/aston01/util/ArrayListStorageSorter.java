@@ -17,7 +17,7 @@ public class ArrayListStorageSorter {
      * @param <Element>  type of the elements used with the method
      * @return a sorted array of objects of type Element
      */
-    public static <Element> Element[] quickSort(Element[] array, Comparator<? super Element> comparator, Class<Element> type) {
+    public static <Element> Element[] quickSort(Element[] array, Comparator<? super Element> comparator, Class<?> type) {
         if (array.length < 2) {
             return array;
         }

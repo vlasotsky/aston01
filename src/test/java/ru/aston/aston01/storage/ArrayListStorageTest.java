@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.UUID;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -188,6 +189,13 @@ public class ArrayListStorageTest {
 
     @Test
     public void getAllSorted() {
+        Object[] expected = Arrays.stream(storage.getAll())
+                .sorted()
+                .toArray();
+
+        final Object[] actual = storage.getAllSorted(UUID::compareTo);
+
+        assertArrayEquals(expected, actual);
     }
 
     private void assertSize(int expected) {

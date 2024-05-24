@@ -100,6 +100,16 @@ public class ArrayListStorageTest {
         assertArrayEquals(AFTER_INSERT, storage.getAll());
     }
 
+    @Test
+    public void insertEmpty() {
+        storage.clear();
+        assertSize(0);
+
+        for (int i = 0; i < 10000; i++) {
+            storage.insert(0, DUMMY);
+        }
+    }
+
     @Test(expected = IndexOutOfBoundsException.class)
     public void insertOutOfBounds() {
         storage.insert(INITIAL_SIZE, DUMMY);
@@ -115,6 +125,14 @@ public class ArrayListStorageTest {
         assertEquals(UUID_02, storage.get(1));
         storage.update(1, DUMMY);
         assertEquals(DUMMY, storage.get(1));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void updateEmpty() {
+        storage.clear();
+        assertSize(0);
+
+        storage.update(0, DUMMY);
     }
 
     @Test(expected = IllegalArgumentException.class)

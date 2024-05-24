@@ -56,8 +56,8 @@ public class ArrayListStorage<Element> implements Storage<Element> {
      */
     @Override
     public void insert(int idx, Element element) {
+        validateIndex(idx, true);
         validateCapacity();
-        validateIndex(idx);
 
         shiftElements(idx, idx + 1);
         doSave(idx, element);
@@ -73,7 +73,7 @@ public class ArrayListStorage<Element> implements Storage<Element> {
      */
     @Override
     public void update(int idx, Element element) {
-        validateIndex(idx);
+        validateIndex(idx, false);
 
         elementData[idx] = element;
     }
@@ -88,7 +88,7 @@ public class ArrayListStorage<Element> implements Storage<Element> {
     @Override
     @SuppressWarnings("unchecked")
     public Element get(int idx) {
-        validateIndex(idx);
+        validateIndex(idx, false);
 
         return (Element) elementData[idx];
     }
@@ -102,7 +102,7 @@ public class ArrayListStorage<Element> implements Storage<Element> {
     @Override
     public void delete(Element element) {
         final int idx = getIndex(element);
-        validateIndex(idx);
+        validateIndex(idx, false);
 
         doDelete(idx);
     }
@@ -115,7 +115,7 @@ public class ArrayListStorage<Element> implements Storage<Element> {
      */
     @Override
     public void deleteByIndex(int idx) {
-        validateIndex(idx);
+        validateIndex(idx, false);
 
         doDelete(idx);
     }
@@ -171,10 +171,14 @@ public class ArrayListStorage<Element> implements Storage<Element> {
         }
     }
 
-    private void validateIndex(int idx) {
+    private void validateIndex(int idx, boolean isExpanding) {
         if (idx < 0) {
-            throw new IllegalArgumentException("There cannot be a negative index " + idx);
-        } else if (idx >= size) {
+            throw new IllegalArgumentException("Negative index: " + idx);
+        }
+
+        boolean indexOutOfBounds = isExpanding ? (size != 0 && idx >= size) || (size == 0 && idx > 0) : idx >= size;
+
+        if (indexOutOfBounds) {
             throw new IndexOutOfBoundsException("Index " + idx + " is out of bounds for size " + size);
         }
     }
